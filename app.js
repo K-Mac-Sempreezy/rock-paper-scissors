@@ -81,6 +81,7 @@ function game(playerSelection, computerSelection) {
   } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
     keepScore(0, 1);
     alert(lose)
+  
   };
 
   playerSelection = null;
