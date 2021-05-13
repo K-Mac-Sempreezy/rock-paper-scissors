@@ -1,92 +1,229 @@
+//Global variables
+
 const moves = ['rock', 'paper', 'scissors'];
 const button = document.querySelector('button');
+const tiles = document.querySelectorAll('.tile');
+const comTiles = document.querySelectorAll('.com-tile');
+const images = document.querySelectorAll('.img');
+const scoreboard = document.querySelector('.scoreboard');
+const scoreList = scoreboard.querySelector('#score-list');
+const tileContainer = document.querySelector('#tile-container');
+const comSelectionTiles = document.querySelectorAll(".com-tile");
+const you = document.querySelector('.you');
+const computer = document.querySelector('.computer');
+
+
 let playerScore = 0;
 let computerScore = 0;
+let computerSelection;
 let playerSelection;
+let choiceMade = false;
+let isGameOver = false;
 
-function keepScore(playScore, comScore) {
-  playerScore =  playerScore + playScore;
-  computerScore = computerScore + comScore;
+//Functions
 
-  if (playerScore >= 3) {
-    alert('Player wins game!')
-    playerScore = 0;
-    computerScore = 0;
-    playerSelection = null;
+
+function keepScore(player, com) {
+  playerScore += player;
+  computerScore += com;
+
+  you.textContent = `YOU ${playerScore}`;
+  computer.textContent = `COM ${computerScore}`;
+  button.textContent = 'RESET';
+  
+  if (playerScore < 5 && computerScore < 5) {
+    button.addEventListener('click', function(){
+      comTiles.forEach(tile => tile.style.boxShadow = "none");
+      tiles.forEach(tile => tile.style.boxShadow = "none");
+      tiles.forEach(tile => tile.addEventListener('mouseover', addShadow));
+      tiles.forEach(tile => tile.addEventListener('mouseleave', removeShadow));
+      comTiles.forEach(comTile => comTile.addEventListener('mouseover', addShadow));
+      comTiles.forEach(comTile => comTile.addEventListener('mouseleave', removeShadow));  
+      isGameOver = false;
+      startGame();
+    }) 
+
+  } else if (playerScore >= 5) {
+      button.textContent = `YOU WIN!\nPLAY AGAIN?`;
+
+      let li = document.createElement('li');
+      li.textContent = 'CONGRATULATIONS! YOU WON THE GAME!';
+      scoreList.prepend(li);
+      
+      you.textContent = `YOU ${playerScore}`;
+      computer.textContent = `COM ${computerScore}`;
+      playerScore = 0;
+      computerScore = 0;
+      playerSelection = null;
+      computerSelection = null;
+      choiceMade = false;
+      isGameOver = !isGameOver;
+      button.addEventListener('click', playAgain);
+      
+    } else if (computerScore >= 5) {
+      button.textContent = `COMPUTER WINS!\nPLAY AGAIN?`;
+
+      let li = document.createElement('li');
+      li.textContent = 'SORRY, YOU LOST THE GAME.';
+      scoreList.prepend(li);
+
+      you.textContent = `YOU ${playerScore}`;
+      computer.textContent = `COM ${computerScore}`;
+      playerScore = 0;
+      computerScore = 0;
+      playerSelection = null;
+      computerSelection = null;
+      choiceMade = false;
+      isGameOver = !isGameOver;
+      button.addEventListener('click', playAgain);
   }
   
-  if (computerScore >= 3) {
-    alert('Computer wins game!')
-    playerScore = 0;
-    computerScore = 0;
-    playerSelection = null;
-  }
+  
 }
-
+ 
+function playAgain() {
+  you.textContent = `YOU ${playerScore}`;
+  computer.textContent = `COM ${computerScore}`; 
+  
+  comTiles.forEach(tile => tile.style.boxShadow = "none");
+  tiles.forEach(tile => tile.style.boxShadow = "none");
+  tiles.forEach(tile => tile.addEventListener('mouseover', addShadow));
+  tiles.forEach(tile => tile.addEventListener('mouseleave', removeShadow));
+  comTiles.forEach(comTile => comTile.addEventListener('mouseover', addShadow));
+  comTiles.forEach(comTile => comTile.addEventListener('mouseleave', removeShadow));  
+  startGame();
+}
 
 function startGame() {
   
-  playerSelection = prompt('Choose rock, paper, or scissors.').toLowerCase();
-
-  if(!playerSelection) {
-    playerSelection = null;
-    startGame();
+  if(isGameOver) {
+    playerScore = 0;
+    computerScore = 0;
+    scoreList.textContent = '';
   }
 
-  if (playerSelection === 'paper') {
-    computerPlay(playerSelection);
-  } else if (playerSelection === 'rock') {
-      computerPlay(playerSelection);
-  } else if (playerSelection === 'scissors') {
-      computerPlay(playerSelection);
-  } else {
-      alert('Check spelling and try again. Choose only rock, paper, or scissors.')
-      startGame();
+  button.textContent = "MAKE YOUR CHOICE";
+
+  comTiles.forEach(comTile => comTile.removeEventListener('mouseover', addShadow));
+
+  tiles.forEach(tile => tile.addEventListener('click', function() {
+    tiles.forEach(tile => tile.removeEventListener('mouseleave', removeShadow));
+    addShadow();
+  }));
+
+  images.forEach(img => img.addEventListener('click', function() {
+    tiles.forEach(tile => tile.removeEventListener('mouseover', addShadow));
+    
+
+    if(choiceMade) { 
+      return 
+    };
+
+    choiceMade = true;
+  }));
+  
+  tiles.forEach(tile => tile.addEventListener('click', translatePlaySelection)); 
+}
+
+function translatePlaySelection() {
+  playerSelection = this.id;
+  
+  if (playerSelection === 'player-rock') {
+    playerSelection = 'rock';
+  } else if (playerSelection === 'player-paper') {
+    playerSelection = 'paper';
+  } else if (playerSelection === 'player-scissors') {
+    playerSelection = 'scissors';
   }
+  computerPlay(playerSelection);
+
+  tiles.forEach(tile => tile.removeEventListener('click', translatePlaySelection)); 
 }
 
 function computerPlay(playerSelection) {
   const computerSelection = moves[Math.floor(Math.random() * moves.length)];
+  let color = '#' + Math.floor(Math.random()*16777215).toString(16);
+  let colorString = '20px 20px 0px 2px ' + color;
+  const tileID = document.getElementById(computerSelection);
+  tileID.style.boxShadow = colorString;
+
+  //add box shadow to computerSelection tile here
   game(playerSelection, computerSelection);
 }
 
 function game(playerSelection, computerSelection) {
 
-  const win = `You win: ${playerSelection} beats ${computerSelection}!`
-  const lose = `You lose: ${playerSelection} loses to ${computerSelection}!`
+  const win = `You win: ${playerSelection} beats ${computerSelection}!`;
+  const lose = `You lose: ${computerSelection} beats ${playerSelection}!`;
 
   if (playerSelection === computerSelection) {
-    alert('It\'s a tie!');
+    
+    let li = document.createElement('li');
+    scoreList.prepend(li);
+    li.textContent = 'Tie';
 
     playerSelection = null;
     computerSelection = null;
     keepScore(0, 0);
-  };
 
-  if (playerSelection === 'paper' && computerSelection === 'rock') {
-    alert(win)
-    keepScore(1, 0);
-  } else if (playerSelection === 'paper' && computerSelection === 'scissors') {
-    keepScore(0, 1);
-    alert(lose)
-  } else if (playerSelection === 'rock' && computerSelection === 'scissors') {
-    keepScore(1, 0);
-    alert(win)
-  } else if (playerSelection === 'rock' && computerSelection === 'paper') {
-    keepScore(0, 1);
-    alert(lose)
-  } else if (playerSelection === 'scissors' && computerSelection === 'paper') {
-    keepScore(1, 0);
-    alert(win)
-  } else if (playerSelection === 'scissors' && computerSelection === 'rock') {
-    keepScore(0, 1);
-    alert(lose)
+  } 
+
+  if  (
+        (playerSelection === 'paper' && computerSelection === 'rock') ||
+        (playerSelection === 'rock' && computerSelection === 'scissors') ||
+        (playerSelection === 'scissors' && computerSelection === 'paper')
+    ) {
+        keepScore(1, 0);
+        let li = document.createElement('li');
+        li.textContent = win;
+        scoreList.prepend(li);
+
+  } else if (
+              (playerSelection === 'paper' && computerSelection === 'scissors') ||
+              (playerSelection === 'rock' && computerSelection === 'paper') ||
+              (playerSelection === 'scissors' && computerSelection === 'rock')
+          ) {
+            keepScore(0, 1);
+            let li = document.createElement('li');
+            li.textContent = lose;
+            scoreList.prepend(li);
+        
+  } 
+
+  button.addEventListener('click', function() {
+    playerSelection = null;
+    computerSelection = null;
+    choiceMade = !choiceMade;
+    startGame();
+  });
   
-  };
+};
 
-  playerSelection = null;
-  computerSelection = null;
-  startGame();
+// Event listeners
+button.addEventListener('click', startGame);
+button.addEventListener('mouseover', addShadow);
+button.addEventListener('mouseleave', removeShadow);
+
+tiles.forEach(tile => tile.addEventListener('mouseover', addShadow));
+tiles.forEach(tile => tile.addEventListener('mouseleave', removeShadow));
+comTiles.forEach(comTile => comTile.addEventListener('mouseover', addShadow));
+comTiles.forEach(comTile => comTile.addEventListener('mouseleave', removeShadow));
+
+
+
+
+
+// JQuery
+
+function addShadow() {
+  console.log(this)
+  let color = '#' + Math.floor(Math.random()*16777215).toString(16);
+  let colorString = '20px 20px 0px 2px ' + color;
+  $(this).css('box-shadow', colorString);
 }
 
-button.addEventListener('click', startGame);
+function removeShadow() {
+  console.log(this);
+  let removed = "none";
+  $(this).css('box-shadow', removed);
+}

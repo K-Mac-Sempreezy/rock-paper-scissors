@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="152px" height="139px" viewBox="0 0 152 139" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>rock</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="rock">
+            <rect id="Rectangle" fill-opacity="0.191170646" fill="#898983" x="0" y="0" width="152" height="139" rx="4"></rect>
+            <text id="🪨" font-family="AppleColorEmoji, Apple Color Emoji" font-size="93" font-weight="normal" fill="#FFFFFF">
+                <tspan x="30" y="102">🪨</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

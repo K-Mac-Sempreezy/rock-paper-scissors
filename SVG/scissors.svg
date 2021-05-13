@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="152px" height="140px" viewBox="0 0 152 140" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>scissors</title>
+    <defs>
+        <text id="text-1" font-family="AppleColorEmoji, Apple Color Emoji" font-size="90" font-weight="normal" fill="#FFFFFF">
+            <tspan x="31" y="101">✂️</tspan>
+        </text>
+        <filter x="-5.6%" y="-10.2%" width="118.9%" height="113.6%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="3" dy="-4" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.153636159 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="scissors" transform="translate(0.000000, 0.404501)">
+            <rect id="Rectangle-Copy-2" fill-opacity="0.191170646" fill="#898983" x="0" y="0" width="152" height="139" rx="4"></rect>
+            <g id="✂️" transform="translate(76.000000, 70.000000) rotate(180.000000) translate(-76.000000, -70.000000) " fill="#FFFFFF" fill-opacity="1">
+                <use filter="url(#filter-2)" xlink:href="#text-1"></use>
+                <use xlink:href="#text-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>
