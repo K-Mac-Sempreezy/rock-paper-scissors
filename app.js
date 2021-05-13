@@ -20,8 +20,8 @@ let playerSelection;
 let choiceMade = false;
 let isGameOver = false;
 
-//Functions
 
+//Functions
 
 function keepScore(player, com) {
   playerScore += player;
@@ -29,7 +29,7 @@ function keepScore(player, com) {
 
   you.textContent = `YOU ${playerScore}`;
   computer.textContent = `COM ${computerScore}`;
-  button.textContent = 'RESET';
+  button.textContent = 'CLICK FOR NEXT TURN';
   
   if (playerScore < 5 && computerScore < 5) {
     button.addEventListener('click', function(){
@@ -60,7 +60,7 @@ function keepScore(player, com) {
       isGameOver = !isGameOver;
       button.addEventListener('click', playAgain);
       
-    } else if (computerScore >= 5) {
+  } else if (computerScore >= 5) {
       button.textContent = `COMPUTER WINS!\nPLAY AGAIN?`;
 
       let li = document.createElement('li');
@@ -77,8 +77,6 @@ function keepScore(player, com) {
       isGameOver = !isGameOver;
       button.addEventListener('click', playAgain);
   }
-  
-  
 }
  
 function playAgain() {
@@ -114,7 +112,6 @@ function startGame() {
   images.forEach(img => img.addEventListener('click', function() {
     tiles.forEach(tile => tile.removeEventListener('mouseover', addShadow));
     
-
     if(choiceMade) { 
       return 
     };
@@ -135,8 +132,8 @@ function translatePlaySelection() {
   } else if (playerSelection === 'player-scissors') {
     playerSelection = 'scissors';
   }
-  computerPlay(playerSelection);
 
+  computerPlay(playerSelection);
   tiles.forEach(tile => tile.removeEventListener('click', translatePlaySelection)); 
 }
 
