@@ -10,47 +10,47 @@
   <title>Document</title>
 </head>
 <body>
-  
-  <div id="gameboard-container" class="main-container">
-    <button class="button">START GAME</button>
-    <div id="scoreboard" class="scoreboard">
-      <ul id="score-list" role="list"></ul>
+  <main>
+    <div id="gameboard-container" class="main-container">
+      <button class="button">START GAME</button>
+      <div id="scoreboard" class="scoreboard">
+        <ul id="score-list"></ul>
+      </div>
+      <div id="player-container" class="container">
+        <div class="you-container">
+          <div class="you">YOU 0</div>
+        </div>
+        <div class="move-container">
+          <div id="player-rock" class="tile">
+            <img src="./SVG/rock.svg" alt="rock" class="img">
+          </div>
+          <div id="player-paper" class="tile">
+            <img src="./SVG/paper.svg" alt="paper" class="img">
+          </div>
+          <div id="player-scissors" class="tile">
+            <img src="./SVG/scissors.svg" alt="scissors" class="img">
+          </div>
+        </div>
+      </div>
+      <div id="player-score"></div>
+      <div id="com-container" class="container">
+        <div class="computer-container">
+          <div class="computer">COM 0</div>
+        </div>
+        <div id="tile-container" class="move-container">
+          <div id="rock" class="com-tile">
+            <img src="/SVG/rock.svg" alt="rock image">
+          </div>
+          <div id="paper" class="com-tile">
+            <img src="/SVG/paper.svg" alt="paper image">
+          </div>
+          <div id="scissors" class="com-tile">
+            <img src="/SVG/scissors.svg" alt="scissors image">
+          </div>
+        </div>
+      </div>
+      <div id="com-score"></div>
     </div>
-    <div id="player-container" class="container">
-      <div class="you-container">
-        <div class="you">YOU 0</div>
-      </div>
-      <div class="move-container">
-        <div id="player-rock" class="tile">
-          <img src="./SVG/rock.svg" alt="rock" class="img">
-        </div>
-        <div id="player-paper" class="tile">
-          <img src="./SVG/paper.svg" alt="paper" class="img">
-        </div>
-        <div id="player-scissors" class="tile">
-          <img src="./SVG/scissors.svg" alt="scissors" class="img">
-        </div>
-      </div>
-    </div>
-    <div id="player-score"></div>
-    <div id="com-container" class="container">
-      <div class="computer-container">
-        <div class="computer">COM 0</div>
-      </div>
-      <div id="tile-container" class="move-container">
-        <div id="rock" class="com-tile">
-          <img src="/SVG/rock.svg" alt="rock image">
-        </div>
-        <div id="paper" class="com-tile">
-          <img src="/SVG/paper.svg" alt="paper image">
-        </div>
-        <div id="scissors" class="com-tile">
-          <img src="/SVG/scissors.svg" alt="scissors image">
-        </div>
-      </div>
-    </div>
-    <div id="com-score"></div>
-  </div>
-  
+  </main>
 </body>
 </html>
