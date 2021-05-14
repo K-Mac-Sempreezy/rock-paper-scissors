@@ -9,7 +9,8 @@ const scoreboard = document.querySelector('.scoreboard');
 const scoreList = scoreboard.querySelector('#score-list');
 const tileContainer = document.querySelector('#tile-container');
 const comSelectionTiles = document.querySelectorAll(".com-tile");
-const you = document.querySelector('.you');
+const youScore = document.querySelector('.player-score');
+const comScore = document.querySelector('.computer-score');
 const computer = document.querySelector('.computer');
 
 
@@ -27,9 +28,9 @@ function keepScore(player, com) {
   playerScore += player;
   computerScore += com;
 
-  you.textContent = `YOU ${playerScore}`;
-  computer.textContent = `COM ${computerScore}`;
-  button.textContent = 'CLICK FOR NEXT TURN';
+  youScore.textContent = playerScore;
+  comScore.textContent = computerScore;
+  button.textContent = 'CLICK';
   
   if (playerScore < 5 && computerScore < 5) {
     button.addEventListener('click', function(){
@@ -44,14 +45,14 @@ function keepScore(player, com) {
     }) 
 
   } else if (playerScore >= 5) {
-      button.textContent = `YOU WIN!\nPLAY AGAIN?`;
+      button.textContent = "YOU WIN! PLAY AGAIN?";
 
       let li = document.createElement('li');
       li.textContent = 'CONGRATULATIONS! YOU WON THE GAME!';
       scoreList.prepend(li);
       
-      you.textContent = `YOU ${playerScore}`;
-      computer.textContent = `COM ${computerScore}`;
+      youScore.textContent = playerScore;
+      comScore.textContent = computerScore;
       playerScore = 0;
       computerScore = 0;
       playerSelection = null;
@@ -61,14 +62,14 @@ function keepScore(player, com) {
       button.addEventListener('click', playAgain);
       
   } else if (computerScore >= 5) {
-      button.textContent = `COMPUTER WINS!\nPLAY AGAIN?`;
+      button.textContent = "COMPUTER WINS! PLAY AGAIN?";
 
       let li = document.createElement('li');
       li.textContent = 'SORRY, YOU LOST THE GAME.';
       scoreList.prepend(li);
 
-      you.textContent = `YOU ${playerScore}`;
-      computer.textContent = `COM ${computerScore}`;
+      youScore.textContent = playerScore;
+      comScore.textContent = computerScore;
       playerScore = 0;
       computerScore = 0;
       playerSelection = null;
@@ -80,8 +81,8 @@ function keepScore(player, com) {
 }
  
 function playAgain() {
-  you.textContent = `YOU ${playerScore}`;
-  computer.textContent = `COM ${computerScore}`; 
+  youScore.textContent = playerScore;
+  comScore.textContent = computerScore; 
   
   comTiles.forEach(tile => tile.style.boxShadow = "none");
   tiles.forEach(tile => tile.style.boxShadow = "none");
