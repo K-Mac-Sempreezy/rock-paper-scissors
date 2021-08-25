@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,48 +10,50 @@
   <script src="./app.js" defer></script>
   <title>Document</title>
 </head>
+
 <body>
   <main>
-    <div id="gameboard-container" class="main-container">
-      <button class="button">START GAME</button>
-      <div id="scoreboard" class="scoreboard">
-        <ul id="score-list"></ul>
-      </div>
+
+    <button class="button">START GAME</button>
+    <div id="scoreboard" class="scoreboard">
+      <ul id="score-list"></ul>
+    </div>
+
+    <div class="player-wrapper">
       <div id="player-container" class="container">
-        <div class="you-container">
-          <div class="you">YOU</div>
+
+        <div class="score">
+          <div class="you-label">YOU</div>
           <div class="player-score">0</div>
         </div>
-        <div class="tile-container">
-          <div id="player-rock" class="tile">
-            <img src="./SVG/rock.svg" alt="rock" class="img">
-          </div>
-          <div id="player-paper" class="tile">
-            <img src="./SVG/paper.svg" alt="paper" class="img">
-          </div>
-          <div id="player-scissors" class="tile">
-            <img src="./SVG/scissors.svg" alt="scissors" class="img">
-          </div>
+
+        <div id="player-rock" class="tile rock">
+          <img src="./SVG/rock.svg" alt="rock">
+        </div>
+
+        <div id="player-paper" class="tile paper">
+          <img src="./SVG/paper.svg" alt="paper">
+        </div>
+
+        <div id="player-scissors" class="tile scissors">
+          <img src="./SVG/scissors.svg" alt="scissors">
         </div>
       </div>
+    </div>
+    <div class="com-wrapper">
       <div id="com-container" class="container">
-        <div class="computer-container">
-          <div class="computer">COM </div>
+
+        <div class="score">
+          <div class="computer-label">COM </div>
           <div class="computer-score">0</div>
         </div>
-        <div class="tile-container">
-          <div id="rock" class="com-tile">
-            <img src="./SVG/rock.svg" alt="rock image">
-          </div>
-          <div id="paper" class="com-tile">
-            <img src="./SVG/paper.svg" alt="paper image">
-          </div>
-          <div id="scissors" class="com-tile">
-            <img src="./SVG/scissors.svg" alt="scissors image">
-          </div>
+
+        <div id="com" class="com-tile">
+          <img src="./SVG/rock.svg" alt="">
         </div>
       </div>
     </div>
   </main>
 </body>
+
 </html>
